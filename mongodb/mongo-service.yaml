@@ -1,0 +1,12 @@
+# mysql/mysql-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  namespace: prod
+spec:
+  clusterIP: None  # Headless — required for StatefulSet DNS
+  selector:
+    app: mongo
+  ports:
+    - port: 27017
