@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8s-prod-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/saud-py/k8s-prod-project   # <-- replace this
+    targetRevision: main
+    path: .         # YAMLs are in root of repo
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+
+  syncPolicy:
+    # Manual sync — you approve in ArgoCD UI before anything deploys
+    syncOptions:
+      - CreateNamespace=true
+    # No automated block = manual sync mode
+    # To enable auto-sync later, uncomment:
+    # automated:
+    #   prune: true
+    #   selfHeal: true
