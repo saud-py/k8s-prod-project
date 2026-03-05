@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init
+  namespace: prod
+data:
+  init.sql: |
+    SET GLOBAL server_id = 1;
+    SET GLOBAL log_bin = 'mysql-bin';
